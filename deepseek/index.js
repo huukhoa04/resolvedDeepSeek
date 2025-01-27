@@ -2,6 +2,7 @@ import axios from "axios";
 import { config } from "../config.js";
 
 const DEEPSEEK_API_URL = 'https://api.deepseek.com/chat/completions';
+const BETA_URL = 'https://api.deepseek.com/beta/chat/completions';
 const headers = {
     'Content-Type': 'application/json',
     Authorization: `Bearer ${config.deepSeek}`,
@@ -45,7 +46,7 @@ export const codeGen = async (query, language) => {
             {role: "assistant", "content": `\`\`\`${language}`, "prefix": True}
         ]
         const response = await axios.post(
-            DEEPSEEK_API_URL,
+            BETA_URL,
             {
                 max_tokens: 700,
                 model: 'deepseek-code',
