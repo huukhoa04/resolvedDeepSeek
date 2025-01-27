@@ -19,11 +19,11 @@ export const deepSeekAPI = async (query) => {
         const response = await axios.post(
             DEEPSEEK_API_URL,
             {
-                max_tokens: 700,
+                max_tokens: 716,
                 model: 'deepseek-chat',
                 messages: messages,
                 stream: false,
-                stop: ['\n']
+                // stop: ['']
             },
             {
                 headers: headers,
@@ -36,6 +36,7 @@ export const deepSeekAPI = async (query) => {
         res.status(500).json({ error: 'Failed to process chat request' });
     }
 }
+
 export const codeGen = async (query, language) => {
     try{
         if(query.length === 0 || query.length > 150){
@@ -48,11 +49,11 @@ export const codeGen = async (query, language) => {
         const response = await axios.post(
             BETA_URL,
             {
-                max_tokens: 700,
+                max_tokens: 716,
                 model: 'deepseek-code',
                 messages: messages,
                 stream: false,
-                stop: ['```']
+                // stop: ['']
             },
             {
                 headers: headers,

@@ -26,16 +26,16 @@ client.on(Events.InteractionCreate, async interaction => {
                 setTimeout(() => reject(new Error('Request timed out after 10 minutes')), 600000)
             )
             ]);
-            await interaction.editReply(`Query: \n\`${query}\`\nResponse: \n\`\`\`${response}\`\`\``);
+            await interaction.editReply(`Query: \n\`${query}\`\nResponse: \n${response}`);
         } catch (error) {
-            await interaction.editReply(`Query: \n\`${query}\`\nError: \n\`\`\`${error.message}\`\`\``);
+            // Only send error message if interaction hasn't been responded to
+          if (!interaction.replied && !interaction.deferred) {
+            await interaction.reply({
+                content: 'There was an error processing your command.',
+                ephemeral: true
+            });
+          }
         }
-    }
-    if (interaction.commandName === 'code') {
-        const query = interaction.options.getString('query');
-        const language = interaction.options.getString('language');
-        console.log(`Query: ${query}, Language: ${language}`);
-        await interaction.reply("Not yet implemented");
     }
 });
 
