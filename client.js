@@ -35,18 +35,7 @@ client.on(Events.InteractionCreate, async interaction => {
         const query = interaction.options.getString('query');
         const language = interaction.options.getString('language');
         console.log(`Query: ${query}, Language: ${language}`);
-        await interaction.deferReply();
-        try {
-            const response = await Promise.race([
-              deepSeekAPI(`Using ${language}, ${query}`),
-              new Promise((_, reject) => 
-                setTimeout(() => reject(new Error('Request timed out after 10 minutes')), 600000)
-              )
-            ]);
-            await interaction.editReply(`Query: \n\`${query}\`\nResponse: ${response}`);
-          } catch (error) {
-            await interaction.editReply(`Query: \n\`${query}\`\nError: \n\`\`\`${error.message}\`\`\``);
-          }
+        await interaction.reply("Not yet implemented");
     }
 });
 
