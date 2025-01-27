@@ -1,0 +1,53 @@
+name: Deploy Discord Bot
+
+on:
+  push:
+    branches: [ main ]
+  pull_request:
+    branches: [ main ]
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    
+    steps:
+    - uses: actions/checkout@v3
+    
+    - name: Setup Node.js
+      uses: actions/setup-node@v3
+      with:
+        node-version: '18'
+    
+    - name: Install dependencies
+      run: npm install
+      
+    - name: Create package-lock.json
+      run: npm i --package-lock-only
+      
+    - name: Cache dependencies
+      uses: actions/cache@v3
+      with:
+        path: ~/.npm
+        key: ${{ runner.os }}-node-${{ hashFiles('**/package-lock.json') }}
+        restore-keys: |
+          ${{ runner.os }}-node-
+
+    - name: Create .env file
+      run: |
+        echo "DEEPSEEKAPI=${{ secrets.DEEPSEEKAPI }}" >> .env
+        echo "DISCORDAPPID=${{ secrets.DISCORDAPPID }}" >> .env
+        echo "TOKEN=${{ secrets.TOKEN }}" >> .env
+
+    - name: Register Commands
+      run: npm run register
+      env:
+        DEEPSEEKAPI: ${{ secrets.DEEPSEEKAPI }}
+        DISCORDAPPID: ${{ secrets.DISCORDAPPID }}
+        TOKEN: ${{ secrets.TOKEN }}
+
+    - name: Start Bot
+      run: npm start
+      env:
+        DEEPSEEKAPI: ${{ secrets.DEEPSEEKAPI }}
+        DISCORDAPPID: ${{ secrets.DISCORDAPPID }}
+        TOKEN: ${{ secrets.TOKEN }}
