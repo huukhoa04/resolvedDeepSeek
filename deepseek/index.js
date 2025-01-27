@@ -22,7 +22,7 @@ export const deepSeekAPI = async (query) => {
                 model: 'deepseek-chat',
                 messages: messages,
                 stream: false,
-                stop: ['\n', '```']
+                stop: ['\n']
             },
             {
                 headers: headers,
