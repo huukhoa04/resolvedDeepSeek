@@ -70,6 +70,46 @@ const commands = [
                 required: true
             }
         ]
+    },
+    {
+        name: 'code',
+        description: 'Generate code using the DeepSeek API',
+        options: [
+            {
+                name: 'language',
+                description: 'Select a language',
+                type: ApplicationCommandOptionType.String,
+                required: true,
+                choices: [
+                    {
+                        name: 'Python',
+                        value: 'py'
+                    },
+                    {
+                        name: 'JavaScript',
+                        value: 'js'
+                    },
+                    {
+                        name: 'Java',
+                        value: 'java'
+                    },
+                    {
+                        name: 'C++',
+                        value: 'cpp'
+                    },
+                    {
+                        name: 'C#',
+                        value: 'csharp'
+                    }
+                ]
+            },
+            {
+                name: 'query',
+                description: 'Enter a query',
+                type: ApplicationCommandOptionType.String,
+                required: true
+            }
+        ]
     }
 ];
 

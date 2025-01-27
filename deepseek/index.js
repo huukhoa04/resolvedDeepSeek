@@ -35,3 +35,32 @@ export const deepSeekAPI = async (query) => {
         res.status(500).json({ error: 'Failed to process chat request' });
     }
 }
+export const codeGen = async (query, language) => {
+    try{
+        if(query.length === 0 || query.length > 150){
+            return 'Token length must be between 1 and 1000 characters.';
+        }
+        const messages = [
+            {role: "user", content: query},
+            {role: "assistant", "content": `\`\`\`${language}`, "prefix": True}
+        ]
+        const response = await axios.post(
+            DEEPSEEK_API_URL,
+            {
+                max_tokens: 700,
+                model: 'deepseek-code',
+                messages: messages,
+                stream: false,
+                stop: ['```']
+            },
+            {
+                headers: headers,
+            }
+        );
+        console.log('Response:', response.data.choices[0].message.content);
+        return response.data.choices[0].message.content;
+    } catch (error) {
+        console.error('Error calling DeepSeek API:', error.message);
+        res.status(500).json({ error: 'Failed to process chat request' });
+    }
+}
