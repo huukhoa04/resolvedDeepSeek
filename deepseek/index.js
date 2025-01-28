@@ -19,7 +19,7 @@ export const deepSeekAPI = async (query) => {
         const response = await axios.post(
             DEEPSEEK_API_URL,
             {
-                max_tokens: 640,
+                max_tokens: 512,
                 model: 'deepseek-chat',
                 messages: messages,
                 stream: false,
@@ -30,8 +30,8 @@ export const deepSeekAPI = async (query) => {
             }
         );
         let content = response.data.choices[0].message.content;
-        if(content.length > 2000){
-            content = content.slice(0, 2000);
+        if(content.length > 1900){
+            content = content.slice(0, 1900);
         }
         console.log('Response:', content);
         messages.push({role: "assistant", content: content});

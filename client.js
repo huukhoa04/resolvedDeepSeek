@@ -23,7 +23,7 @@ client.on(Events.InteractionCreate, async interaction => {
             const response = await Promise.race([
             deepSeekAPI(query),
             new Promise((_, reject) => 
-                setTimeout(() => reject(new Error('Request timed out after 10 minutes')), 600000)
+                setTimeout(() => reject(new Error('Request timed out after 10 minutes')), 120000)
             )
             ]);
             await interaction.editReply(`\`${query}\`\n${response}`);
