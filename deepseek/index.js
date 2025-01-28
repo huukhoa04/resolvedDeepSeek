@@ -7,15 +7,15 @@ const headers = {
     'Content-Type': 'application/json',
     Authorization: `Bearer ${config.deepSeek}`,
 }
+let messages = [
+    {role: "system", content: "You are a helpful assistant."},
+]
 export const deepSeekAPI = async (query) => {
     try{
         if(query.length === 0 || query.length > 150){
             return 'Token length must be between 1 and 1000 characters.';
         }
-        const messages = [
-            {role: "system", content: "You are a helpful assistant."},
-            {role: "user", content: query}
-        ]
+        messages.push({role: "user", content: query});
         const response = await axios.post(
             DEEPSEEK_API_URL,
             {
