@@ -37,6 +37,10 @@ client.on(Events.InteractionCreate, async interaction => {
           }
         }
     }
+    if(interaction.commandName === 'chatreset'){
+        chatReset();
+        await interaction.reply('Chat reset.');
+    }
 });
 
 export const resolvedDeepSeek = client;

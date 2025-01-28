@@ -110,6 +110,11 @@ const commands = [
                 required: true
             }
         ]
+    },
+    {
+        name: 'chatreset',
+        description: 'Reset the chat session with DeepSeek',
+        options: []
     }
 ];
 

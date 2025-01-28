@@ -41,7 +41,11 @@ export const deepSeekAPI = async (query) => {
         res.status(500).json({ error: 'Failed to process chat request' });
     }
 }
-
+export const chatReset = () => {
+    messages = [
+        {role: "system", content: "You are a helpful assistant."},
+    ]
+}
 export const codeGen = async (query, language) => {
     try{
         if(query.length === 0 || query.length > 150){
