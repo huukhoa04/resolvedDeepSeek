@@ -26,7 +26,7 @@ client.on(Events.InteractionCreate, async interaction => {
                 setTimeout(() => reject(new Error('Request timed out after 10 minutes')), 600000)
             )
             ]);
-            await interaction.editReply(`Query: \n\`${query}\`\nResponse: \n${response}`);
+            await interaction.editReply(`\`${query}\`\n${response}`);
         } catch (error) {
             // Only send error message if interaction hasn't been responded to
           if (!interaction.replied && !interaction.deferred) {
