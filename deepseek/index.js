@@ -19,7 +19,7 @@ export const deepSeekAPI = async (query) => {
         const response = await axios.post(
             DEEPSEEK_API_URL,
             {
-                max_tokens: 716,
+                max_tokens: 512,
                 model: 'deepseek-chat',
                 messages: messages,
                 stream: false,
