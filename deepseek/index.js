@@ -29,9 +29,13 @@ export const deepSeekAPI = async (query) => {
                 headers: headers,
             }
         );
-        console.log('Response:', response.data.choices[0].message.content);
-        messages.push({role: "assistant", content: response.data.choices[0].message.content});
-        return response.data.choices[0].message.content;
+        let content = response.data.choices[0].message.content;
+        if(content.length > 1700){
+            content = content.slice(0, 1700);
+        }
+        console.log('Response:', content);
+        messages.push({role: "assistant", content: content});
+        return content;
     } catch (error) {
         console.error('Error calling DeepSeek API:', error.message);
         res.status(500).json({ error: 'Failed to process chat request' });
