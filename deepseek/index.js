@@ -30,6 +30,7 @@ export const deepSeekAPI = async (query) => {
             }
         );
         console.log('Response:', response.data.choices[0].message.content);
+        messages.push({role: "assistant", content: response.data.choices[0].message.content});
         return response.data.choices[0].message.content;
     } catch (error) {
         console.error('Error calling DeepSeek API:', error.message);
